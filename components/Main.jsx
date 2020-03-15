@@ -1,13 +1,6 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TextInput,
-  FlatList,
-} from 'react-native';
+import { FlatList } from 'react-native';
 
 import GoalItem from './GoalItem';
 import GoalInput from './GoalInput';
@@ -15,9 +8,23 @@ import GoalInput from './GoalInput';
 const Main = props => {
   const [courseGoals, setCourseGoals] = useState([]);
 
+  const addCourseGoal = (id, value) => {
+    setCourseGoals(goals => [
+      {
+        id,
+        value,
+      },
+      ...goals,
+    ]);
+  };
+
+  const deleteCourseGoal = id => {
+    setCourseGoals(goals => goals.filter(goal => goal.id !== id));
+  };
+
   return (
     <Fragment>
-      <GoalInput setCourseGoals={setCourseGoals} />
+      <GoalInput addCourseGoal={addCourseGoal} />
       {/* <ScrollView>
         {courseGoals.map(goal => (
           <View style={styles.listItem} key={goal.id}>
@@ -26,9 +33,11 @@ const Main = props => {
         ))}
       </ScrollView> */}
       <FlatList
-        keyExtractor={(item, index) => item.id}
+        keyExtractor={(item, index) => item.id} // use 'id' as key
         data={courseGoals}
-        renderItem={itemData => <GoalItem title={itemData.item.value} />}
+        renderItem={itemData => (
+          <GoalItem goal={itemData.item} deleteCourseGoal={deleteCourseGoal} />
+        )}
       ></FlatList>
     </Fragment>
   );

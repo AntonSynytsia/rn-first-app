@@ -21,7 +21,7 @@ const generateId = length => {
   return result;
 };
 
-const GoalInput = ({ setCourseGoals }) => {
+const GoalInput = ({ addCourseGoal }) => {
   const [enteredGoal, setEnteredGoal] = useState('');
 
   function goalInputHandler(text) {
@@ -29,16 +29,10 @@ const GoalInput = ({ setCourseGoals }) => {
   }
 
   function addGoalHandler() {
-    const goal = enteredGoal.trim();
-    setEnteredGoal('');
     const uuid = generateId(16);
-    setCourseGoals(goals => [
-      {
-        id: uuid,
-        value: goal,
-      },
-      ...goals,
-    ]);
+    const goal = enteredGoal.trim();
+    addCourseGoal(uuid, goal);
+    setEnteredGoal('');
   }
 
   return (
