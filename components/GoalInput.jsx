@@ -8,6 +8,7 @@ import {
   Button,
   TextInput,
   FlatList,
+  Modal,
 } from 'react-native';
 
 const generateId = length => {
@@ -21,7 +22,7 @@ const generateId = length => {
   return result;
 };
 
-const GoalInput = ({ addCourseGoal }) => {
+const GoalInput = ({ isAddMode, setIsAddMode, addCourseGoal }) => {
   const [enteredGoal, setEnteredGoal] = useState('');
 
   function goalInputHandler(text) {
@@ -31,24 +32,27 @@ const GoalInput = ({ addCourseGoal }) => {
   function addGoalHandler() {
     const uuid = generateId(16);
     const goal = enteredGoal.trim();
-    addCourseGoal(uuid, goal);
-    setEnteredGoal('');
+    addCourseGoal(uuid, goal); // update the courseGoals state
+    setEnteredGoal(''); // clear the text input
+    setIsAddMode(false); // close modal when the add button is pressed
   }
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        placeholder="Course Goal"
-        style={styles.textInput}
-        onChangeText={goalInputHandler}
-        value={enteredGoal}
-      ></TextInput>
-      <Button
-        title="Add"
-        onPress={addGoalHandler}
-        disabled={enteredGoal.trim().length === 0}
-      />
-    </View>
+    <Modal visible={isAddMode} animationType="slide">
+      <View style={styles.container}>
+        <TextInput
+          placeholder="Course Goal"
+          style={styles.textInput}
+          onChangeText={goalInputHandler}
+          value={enteredGoal}
+        ></TextInput>
+        <Button
+          title="Add"
+          onPress={addGoalHandler}
+          disabled={enteredGoal.trim().length === 0}
+        />
+      </View>
+    </Modal>
   );
 };
 
@@ -56,16 +60,17 @@ GoalInput.propTypes = {};
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'stretch',
     marginBottom: 6,
   },
   textInput: {
     borderBottomColor: 'black',
     borderBottomWidth: 1,
     padding: 3,
-    marginRight: 3,
-    flex: 1,
+    marginBottom: 6,
   },
 });
 

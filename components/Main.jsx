@@ -1,12 +1,13 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { FlatList } from 'react-native';
+import { FlatList, Button } from 'react-native';
 
 import GoalItem from './GoalItem';
 import GoalInput from './GoalInput';
 
 const Main = props => {
   const [courseGoals, setCourseGoals] = useState([]);
+  const [isAddMode, setIsAddMode] = useState(false);
 
   const addCourseGoal = (id, value) => {
     setCourseGoals(goals => [
@@ -24,7 +25,12 @@ const Main = props => {
 
   return (
     <Fragment>
-      <GoalInput addCourseGoal={addCourseGoal} />
+      <Button title="Add New Goal" onPress={() => setIsAddMode(true)} />
+      <GoalInput
+        isAddMode={isAddMode}
+        setIsAddMode={setIsAddMode}
+        addCourseGoal={addCourseGoal}
+      />
       {/* <ScrollView>
         {courseGoals.map(goal => (
           <View style={styles.listItem} key={goal.id}>

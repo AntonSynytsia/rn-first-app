@@ -7,7 +7,7 @@ A React Native App for logging and managing goals.
 1. Install NodeJS
 2. Install `expo-cli`: https://docs.expo.io/versions/latest/workflow/expo-cli/
 3. Install Android Studio and setup the emulator: https://docs.expo.io/versions/v36.0.0/workflow/android-studio-emulator/
-4. Ensure _Google Play Services_ is also installed in Android Studio DK Manager.
+4. Ensure _Google Play Services_ is also installed in Android Studio SDK Manager.
 5. Create an emulator, preferably with _Google Play Services_.
 6. Install node modules:
 

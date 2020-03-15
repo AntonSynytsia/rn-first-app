@@ -1,6 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  TouchableHighlight,
+  TouchableNativeFeedback,
+  TouchableWithoutFeedback,
+} from 'react-native';
 
 const GoalItem = ({ goal, deleteCourseGoal }) => {
   const deleteGoalHandler = () => {
@@ -8,7 +16,10 @@ const GoalItem = ({ goal, deleteCourseGoal }) => {
   };
 
   return (
-    <TouchableOpacity onPress={deleteGoalHandler}>
+    //<TouchableWithoutFeedback>
+    //<TouchableNativeFeedback onPress={deleteGoalHandler}> // android only
+    //<TouchableHighlight underlayColor={} onPress={deleteGoalHandler}>
+    <TouchableOpacity activeOpacity={0.8} onPress={deleteGoalHandler}>
       <View style={styles.listItem}>
         <Text>{goal.value}</Text>
       </View>
