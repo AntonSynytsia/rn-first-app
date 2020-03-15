@@ -46,11 +46,22 @@ const GoalInput = ({ isAddMode, setIsAddMode, addCourseGoal }) => {
           onChangeText={goalInputHandler}
           value={enteredGoal}
         ></TextInput>
-        <Button
-          title="Add"
-          onPress={addGoalHandler}
-          disabled={enteredGoal.trim().length === 0}
-        />
+        <View style={styles.buttonContainer}>
+          <View style={styles.button1}>
+            <Button
+              title="CANCEL"
+              color="red"
+              onPress={() => setIsAddMode(false)}
+            />
+          </View>
+          <View style={styles.button2}>
+            <Button
+              title="ADD"
+              onPress={addGoalHandler}
+              disabled={enteredGoal.trim().length === 0}
+            />
+          </View>
+        </View>
       </View>
     </Modal>
   );
@@ -59,12 +70,24 @@ const GoalInput = ({ isAddMode, setIsAddMode, addCourseGoal }) => {
 GoalInput.propTypes = {};
 
 const styles = StyleSheet.create({
+  button1: {
+    flex: 1,
+    marginRight: 6,
+  },
+  button2: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'stretch',
-    marginBottom: 6,
+    padding: 10,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
   },
   textInput: {
     borderBottomColor: 'black',
